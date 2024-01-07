@@ -1,0 +1,257 @@
+<!-- result.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <style>
+        body {
+            background-image: url('https://wallpapercave.com/w/wp1813039.jpg');
+            background-size: cover;
+            
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .result-container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-container {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .info-buttons {
+            display: flex;
+            flex-direction: column;
+            margin-right: 20px;
+        }
+
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+    </style>
+    <script>
+        function showInfo(category) {
+            // Hide all info containers
+            var infoContainers = document.getElementsByClassName('info-container');
+            for (var i = 0; i < infoContainers.length; i++) {
+                infoContainers[i].style.display = 'none';
+            }
+
+            // Show the selected info container
+            var selectedContainer = document.getElementById(category + '-info');
+            if (selectedContainer) {
+                selectedContainer.style.display = 'block';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="result-container">
+        <div class="prediction-result">
+            <h1>Prediction Result</h1>
+            <p>Stage Prediction: {{ stage_prediction }}</p>
+            <p>Surgery Prediction: {{ surgery_prediction_name }} ({{ surgery_prediction_number }})</p>
+            <p>Class Prediction: {{ class_prediction }}</p>
+        </div>
+
+        <div class="additional-info">
+            <h2>Additional Information</h2>
+
+            <!-- Buttons for each category -->
+            <div class="info-buttons">
+                <button class="button" onclick="showInfo('stage')">Let me know about Stage</button>
+                <button class="button" onclick="showInfo('surgery')">Let me know about Surgery</button>
+                <button class="button" onclick="showInfo('class')">Let me know about Class</button>
+            </div>
+
+            <!-- Information containers -->
+            <div id="stage-info" class="info-container">
+                {% if stage_prediction == 1 %}
+            <p>Cancer Staging 1: Starting, when the tumor invades the mucosa and submucosa.</p>
+        {% elif stage_prediction == 2 %}
+            <p>Cancer Staging 2: Progressing, invasion of tunica muscularis.</p>
+        {% elif stage_prediction == 3 %}
+            <p>Cancer Staging 3: Invasion of all colon tunicae without exceeding serosa.</p>
+        {% elif stage_prediction == 4 %}
+            <p>Cancer Staging 4: Ending, invasion of neighboring organs and distant metastases.</p>
+        {% endif %}
+                <!-- Information about Stage -->
+                <!-- ... -->
+            </div>
+
+            <div id="surgery-info" class="info-container">
+               
+        <!-- Information about Surgery -->
+        {% if surgery_prediction_number == 1 %}
+            <p>1. Hartmann rectosigmoid resection:</p>
+            <p>Hartmann rectosigmoid resection is a surgical procedure involving the removal of a portion of the rectosigmoid colon. The key steps include:</p>
+            <p>Hartmann rectosigmoid resection is a surgical procedure involving the removal of a portion of the rectosigmoid colon. The key steps include:</p>
+            <p>   1:Incision: An incision is made in the abdominal wall to access the rectosigmoid area.            </p>
+
+            <p>    2:Identification of the Rectosigmoid: The surgeon identifies the specific portion of the rectosigmoid colon that needs to be removed.
+            </p>
+                
+            <p>        3:Resection: The identified section of the rectosigmoid colon is carefully removed.
+            </p>
+                
+            <p>    4:Closure: The remaining ends of the colon are either joined back together (anastomosis) if possible, or the surgeon creates a stoma (an opening in the abdominal wall) for the temporary or permanent diversion of fecal flow.</p>
+                
+            <p>        5:Closure of Incision: The abdominal incision is closed, completing the surgical procedure.
+            </p>
+            <!-- Include detailed information about this surgery here -->
+        {% elif surgery_prediction_number == 2 %}
+            <p>2. Dixon rectosigmoidian resection:</p>
+            <p>No information provided.</p>
+
+        {% elif surgery_prediction_number == 3 %}
+            <p>3. Right hemicolectomy:</p>
+            <p>Right hemicolectomy is a surgical procedure involving the removal of the right portion of the colon. The procedure typically includes the following steps:</p>
+            <p>   1:Incision: An incision is made in the abdominal wall, allowing access to the right side of the colon.</p>
+
+            <p>    2:Mobilization of the Colon: The surgeon carefully frees the right side of the colon from its attachments to surrounding tissues.</p>
+                
+            <p>        3:Identification and Ligation of Blood Vessels: Blood vessels supplying the right colon are identified, clamped, and ligated to prevent bleeding during the removal.</p>
+                
+            <p>    4:Resection: The right portion of the colon, including the cecum and ascending colon, is removed.</p>
+                
+            <p>        5:Bowel Reconstruction: The remaining ends of the colon may be reconnected (anastomosis) to restore the continuity of the digestive tract.</p>
+                
+            <p>    6:Closure: The incision in the abdominal wall is closed, completing the surgical procedure. </p>
+            <!-- Include detailed information about this surgery here -->
+        {% elif surgery_prediction_number == 4 %}
+            <p>4. Left hemicolectomy:</p>
+            <p>Left hemicolectomy is a surgical procedure involving the removal of the left portion of the colon. The procedure typically includes the following steps:</p>
+            <p> Incision: An incision is made in the abdominal wall, allowing access to the left side of the colon.</p>
+
+            <p>    1:Mobilization of the Colon: The surgeon carefully frees the left side of the colon from its attachments to surrounding tissues.</p>
+                
+            <p>    2:Identification and Ligation of Blood Vessels: Blood vessels supplying the left colon are identified, clamped, and ligated to prevent bleeding during the removal.</p>
+                
+            <p>    3:Resection: The left portion of the colon, including the sigmoid colon and part of the descending colon, is removed.</p>
+                
+            <p>    4:Bowel Reconstruction: The remaining ends of the colon may be reconnected (anastomosis) to restore the continuity of the digestive tract.</p>
+                
+            <p>    5:Closure: The incision in the abdominal wall is closed, completing the surgical procedure. </p>
+            
+            
+            <!-- Include detailed information about this surgery here -->
+        {% elif surgery_prediction_number == 5 %}
+            <p>5. Segmental colectomy:</p>
+            <p>Segmental colectomy is a surgical procedure that involves the removal of a specific segment or portion of the colon. The procedure generally includes the following steps:</p>
+            <p>   1:Incision: An incision is made in the abdominal wall to access the affected segment of the colon.</p>
+
+            <p>    2:Mobilization of the Colon: The surgeon carefully frees the affected portion of the colon from its surrounding attachments.</p>
+                
+            <p>        3:Identification and Ligation of Blood Vessels: Blood vessels supplying the segment of the colon to be removed are identified, clamped, and ligated to prevent bleeding.
+            </p>
+                
+            <p>    4:Resection: The targeted segment of the colon is removed.</p>
+                
+            <p>        5:Bowel Reconstruction: The remaining ends of the colon may be rejoined (anastomosis) to restore the continuity of the digestive tract.
+            </p>
+                
+            <p>    6Closure: The incision in the abdominal wall is closed, completing the surgical procedure.</p>
+            
+            
+            
+            <!-- Include detailed information about this surgery here -->
+        {% elif surgery_prediction_number == 6 %}
+            <p>6. Rectal biopsy:</p>
+            <p>A rectal biopsy is a diagnostic procedure to obtain tissue samples from the rectum for examination. The procedure typically involves the following steps:</p>
+            <p>   1:Preparation: The patient may need to undergo bowel preparation to ensure a clear view of the rectal area.
+            </p>
+
+            <p>    2:Positioning: The patient is usually positioned on their left side, and a lubricated instrument called a proctoscope or sigmoidoscope is gently inserted into the rectum for visualization.</p>
+                
+            <p>        3:Biopsy Instrumentation: A biopsy forceps or similar instrument is introduced through the proctoscope, allowing the surgeon to grasp and remove small tissue samples from the rectal lining.
+
+            </p>
+                
+            <p>    4:Tissue Collection: Multiple small tissue samples (biopsies) are taken from different areas of the rectum to ensure a comprehensive examination.
+            </p>
+                
+            <p>        5:Removal of Instruments: The instruments are carefully withdrawn, and the procedure is completed.
+            </p>
+                
+            <p>    6Closure:Pathological Examination: The collected tissue samples are sent to a laboratory for pathological examination, where they are analyzed under a microscope to identify any abnormalities or diseases.</p>
+
+            
+            
+            <!-- Include detailed information about this surgery here -->
+        {% elif surgery_prediction_number == 7 %}
+            <p>7. Ileotransverse-anastomosis:</p>
+            <p>Ileotransverse anastomosis is a surgical procedure that involves connecting the ileum to the transverse colon. The procedure typically includes the following steps:</p>
+            <p> 1:Incision: An incision is made in the abdominal wall to access the ileum and transverse colon.</p>
+            <p> 2:Mobilization of Intestines: Surgeons carefully free the ileum and transverse colon from their surrounding attachments, allowing them to be manipulated for the anastomosis.</p>
+            <p> 3:Anastomosis: The ileum and transverse colon are joined together with sutures or staples to create a connection, allowing the flow of digestive contents between the small and large intestines.</p>
+            <p> 4:Closure: The incision in the abdominal wall is closed, completing the surgical procedure.</p>
+
+            
+            
+            <!-- Include detailed information about this surgery here -->
+        {% elif surgery_prediction_number == 8 %}
+            <p>8. Abdominoperineal rectal amputation:</p>
+            <p>Abdominoperineal rectal amputation is a surgical procedure involving the removal of the rectum and anus. The procedure typically includes the following steps:</p>
+            <p>1:Incision: An incision is made in the abdominal wall and perineum to access the rectum.</p>
+            <p>2:Mobilization: The rectum is carefully freed from its surrounding attachments, and blood vessels supplying the rectum are identified and ligated.</p>
+            <p>3:Removal of the Rectum: The rectum is dissected from the surrounding tissues and then removed.</p>
+            <p>4:Creation of a Stoma: The surgeon creates a stoma (an opening) in the abdominal wall, typically using the end of the colon, to allow for the elimination of waste.</p>
+            <p>5:Closure of the Perineum: The perineal incision is closed.</p>
+            <p>6:Stoma Management: The stoma is brought out through the abdominal wall and managed to allow for the collection of fecal material.</p>
+           
+            <!-- Include detailed information about this surgery here -->
+        {% elif surgery_prediction_number == 9 %}
+            <p>9. Left iliac colostomy:</p>
+            <p>Left iliac colostomy is a surgical procedure that involves creating an opening in the left lower abdomen to divert the flow of fecal material from the colon to the exterior of the body. The procedure generally includes the following steps:</p>
+            <p> 1:Incision: An incision is made in the left lower abdomen.</p>
+            <p>2:Identification of the Colon: The surgeon identifies the left portion of the colon.</p>
+            <p>3:Extracorporeal Anastomosis: The colon is brought out through the abdominal wall, and an opening (stoma) is created.</p>
+            <p>4:Fixation: The edges of the colon are secured to the skin to prevent movement.</p>
+            <p>5:Closure: The incision around the stoma is closed.</p>
+           
+           
+           
+            <!-- Include detailed information about this surgery here -->
+        {% endif %}
+
+                <!-- Information about Surgery -->
+                <!-- ... -->
+            </div>
+
+            <div id="class-info" class="info-container">
+                <!-- Information about Class -->
+        {% if class_prediction.lower() == 'short' %}
+        <p>Class Short: Patient may have to stay for approximately one week after the surgery.</p>
+    {% elif class_prediction.lower() == 'medium' %}
+        <p>Class Medium: Patient may have to stay for approximately two weeks after the surgery.</p>
+    {% elif class_prediction.lower() == 'long' %}
+        <p>Class Long: Patient may have to stay for more than two weeks (14 days) after the surgery.</p>
+    {% endif %}
+                <!-- Information about Class -->
+                <!-- ... -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

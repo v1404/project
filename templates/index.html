@@ -1,0 +1,158 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictor</title>
+    <style>
+        body {
+            color: white;
+            text-align: center;
+            background-image: url('https://wallpapercave.com/w/wp4331254.jpg');
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column; /* Center content vertically and place heading at the top */
+            justify-content: center; /* Center content horizontally */
+        }
+
+        h1 {
+            color: white;
+            margin-bottom: 30px;
+            font-size: 36px; /* Adjust the font size as needed */
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 800px;
+            padding: 40px;
+            border: 2px solid white;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            margin: auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            background-color: #333;
+            color: white;
+            border: 1px solid #555;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            grid-column: span 2;
+            background-color: green;
+            color: white;
+            cursor: pointer;
+        }
+
+        .parameter-heading {
+            grid-column: span 2;
+            text-align: left;
+            color: white;
+            font-size: 18px; /* Adjust the font size as needed */
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .parameter-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Enter Patient Details</h1>
+    <form action="/predict" method="post">
+        <div>
+            <!-- Age, Sex, Topography in one column -->
+            {% for col in ['AGE', 'SEX', 'TOPOGRAPHY'] %}
+                <label for="{{ col }}">{{ col }}:</label>
+                {% if col == 'TOPOGRAPHY' %}
+                    <select name="{{ col }}" required>
+                        <option value="" disabled selected>Select {{ col }}</option>
+                        <option value="Cecum">Cecum</option>
+                        <option value="Ascending colon">Ascending colon</option>
+                        <option value="Descending colon">Descending colon</option>
+                        <option value="Sigmoid colon">Sigmoid colon</option>
+                        <option value="Transverse colon">Transverse colon</option>
+                        <option value="Rectosigmoid junction">Rectosigmoid junction</option>
+                        <option value="Rectum">Rectum</option>
+                        <option value="Hepatic flexure">Hepatic flexure</option>
+                        <option value="Splenic flexure">Splenic flexure</option>
+                    </select>
+                {% elif col == 'SEX' %}
+                    <select name="{{ col }}" required>
+                        <option value="" disabled selected>Select {{ col }}</option>
+                        <option value="F">Female</option>
+                        <option value="M">Male</option>
+                    </select>
+                {% elif col == 'AGE' %}
+                    <input type="number" name="{{ col }}" required step="0.01">
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div>
+            <!-- T, N, M in another column -->
+            <div class="parameter-container">
+                <div class="parameter-heading">Tumor Parameter</div>
+                <label for="T">T:</label>
+            </div>
+            <select name="T" required>
+                <option value="" disabled selected>Select T</option>
+                <option value="T0">Tumor Parameter (T0)</option>
+                <option value="T1">Tumor Parameter (T1)</option>
+                <option value="T2">Tumor Parameter (T2)</option>
+                <option value="T3">Tumor Parameter (T3)</option>
+                <option value="T4">Tumor Parameter (T4)</option>
+                <option value="Tx">Tumor Parameter (Tx)</option>
+            </select>
+
+            <!-- Adenopathy (N) Parameter -->
+            <div class="parameter-container">
+                <div class="parameter-heading">Adenopathy Parameter</div>
+                <label for="N">N:</label>
+            </div>
+            <select name="N" required>
+                <option value="" disabled selected>Select N</option>
+                <option value="NO">Adenopathy Parameter (NO)</option>
+                <option value="N1">Adenopathy Parameter (N1)</option>
+                <option value="N2">Adenopathy Parameter (N2)</option>
+                <option value="Nx">Adenopathy Parameter (Nx)</option>
+            </select>
+
+            <!-- Metastases (M) Parameter -->
+            <div class="parameter-container">
+                <div class="parameter-heading">Metastases Indicator</div>
+                <label for="M">M:</label>
+            </div>
+            <select name="M" required>
+                <option value="" disabled selected>Select M</option>
+                <option value="MO">Metastases Indicator (MO)</option>
+                <option value="M1">Metastases Indicator (M1)</option>
+                <option value="M1 hep">Metastases Indicator (M1 hep)</option>
+                <option value="Mx">Metastases Indicator (Mx)</option>
+            </select>
+        </div>
+        <input type="submit" value="Predict">
+    </form>
+</body>
+</html>
