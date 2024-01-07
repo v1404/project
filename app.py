@@ -97,6 +97,3 @@ def predict():
                                    surgery_prediction_number=surgery_prediction_number,
                                    surgery_prediction_name=surgery_prediction_name,
                                    class_prediction=class_prediction)
-
-if __name__ == '__main__':
-    app.run(debug=True)
